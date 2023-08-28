@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- report_template.html -->
+<div class="page-container">
+
+
+    <!-- Content Wrapper START -->
+    <div class="main-content">
+        <div class="row">
+            <form method="POST" action="{% url 'gptReport' %}">
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Enter Username" required>
+                <input type="submit" class="btn btn-primary" value="Report">
+            </form>
+        </div>
+        
+
+    </div>
+</div>
+
+
+{% endblock %}

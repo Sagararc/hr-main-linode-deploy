@@ -1,0 +1,280 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+
+<div class="row container-fluid">
+
+  <div class="col">
+
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/dash">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="/home">Users</a></li>
+          <li class="breadcrumb-item">Register</li>
+         
+      </ol>
+  </div>
+</div>
+
+<div class="row container-fluid mt-4">
+  <div class="col-lg-10 ">
+    <h3 >Registration Form</h3>
+    <div class="card">
+  
+      <div class="card-body">
+        {% if form.errors %}
+        <div class="alert alert-danger">
+            {% for field in form %}
+            {% for error in field.errors %}
+            <p>{{ error }}</p>
+            {% endfor %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if error_message %}
+        <div class="alert alert-danger">
+            {{ error_message }}
+        </div>
+        {% endif %}
+        <div class="row">
+          <div class="col-lg-12">
+
+
+
+            <form method="POST" enctype="multipart/form-data" action="{% url 'register' %}">
+                  {% csrf_token %}
+                 
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="name">Name</label>
+                      <input type="text" class="form-control" name="name" placeholder="Name"
+                        value="{{ form.name.value|default_if_none:'' }}" required="">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="name">Mobile</label>
+                      <input type="text" name="mobile" class="form-control" placeholder="Mobile"
+                        value="{{ form.mobile.value|default_if_none:'' }}" required="" id="mobileInput">
+
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+
+                      <label for="name">Email</label>
+                      <input type="email" name="email" class="form-control" placeholder="Email"
+                        value="{{ form.email.value|default_if_none:'' }}" required="">
+
+                    </div>
+                    <div class="form-group col-md-6">
+
+                      <div class="input-affix">
+                        <i class="prefix-icon anticon anticon-calendar"></i>
+                        <label for="name">Date Of Joining</label>
+                        <input type="date" name="doj" class="form-control datepicker-input" value="{{ form.doj.value|default_if_none:'' }}" placeholder="">
+                      </div>
+
+
+                    </div>
+                  </div>
+                  <div class="form-row">
+
+                    <div class="form-group col-md-6">
+
+                      <label for="picture">Profile Picture</label>
+                        <input type="file" class="form-control"value="{{ form.picture.value|default_if_none:'' }}">
+                    
+                    </div>
+                    <div class="form-group col-md-6">
+
+                      
+                        <label for="picture">Date Of Birth</label>
+                        <i class="prefix-icon anticon anticon-calendar"></i>
+                        <input type="date"  name='dob' class="form-control" value="{{ form.dob.value|default_if_none:'' }}">
+
+                    </div>
+
+                  </div>
+
+                  <div class="form-row">
+
+                    
+                    <div class="form-group col-md-6">
+                      <label for="picture">C4</label>
+                      <input type="file" class="form-control">
+                      
+                    </div>
+                    
+                    <div class="form-group col-md-6">
+                      <label for="customFile">Sign-Off</label>
+                      <input type="file" class="form-control">
+                    
+                    </div>
+                  </div>
+
+
+                  <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="acc_num">Status</label>
+                      <div class="m-b-15">
+                          <select class="form-control" name="status">
+                              <option value="">Status</option>
+                              <option value="Working" {% if form.status.value == 'Working' %}selected{% endif %}>Working</option>
+                              <option value="Not Working" {% if form.status.value == 'Not Working' %}selected{% endif %}>Not Working</option>
+                              <option value="Under Evaluation" {% if form.status.value == 'Under Evaluation' %}selected{% endif %}>Under Evaluation</option>
+                              <option value="Selection In Process" {% if form.status.value == 'Selection In Process' %}selected{% endif %}>Selection In Process</option>
+                              <option value="Rejected" {% if form.status.value == 'Rejected' %}selected{% endif %}>Rejected</option>
+                              <option value="Selected" {% if form.status.value == 'Selected' %}selected{% endif %}>Selected</option>
+                          </select>
+                      </div>
+                  </div>
+        
+
+             
+                  
+                    <div class="form-group col-md-6">
+                      <label for="acc_num">Account Number</label>
+                      <input type="text" class="form-control" name="accNnum" placeholder="Account Number"
+                      value="{{ form.accNnum.value|default_if_none:'' }}" required="">
+                    </div>
+
+                    </div>
+
+                    <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label for="acc_num">IFSC</label>
+                      <input type="text" name="ifsc" class="form-control" placeholder="IFSC"
+                        value="{{ form.ifsc.value|default_if_none:'' }}" required="" id="mobileInput">
+
+                    </div>
+                
+                  
+                    <div class="form-group col-md-6">
+                      <label for="acc_num">Aadhar</label>
+                      <input type="file" class="form-control" >
+                      
+                    </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label>Aadhar Card Attested</label>
+                      <input type="file" name="aadharAttested" class="form-control" placeholder="" 
+                        id="inputCity">
+                     
+                    </div>
+                  
+
+
+                    <div class="form-group col-md-6">
+                      <label >Aadhar Card Attested</label>
+                      <div class="m-b-15">
+                        <select class="form-control" name="cityReg" id="cityReg">
+                          {% for city in cities %}
+                          <option value="{{ city.id }}" {% if city.id == form.cityReg.value %}selected{% endif %}>{{ city.city }}</option>
+                          {% endfor %}
+                      </select>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group col-md-6">
+                      <label >Designation</label>
+                      <div class="m-b-15">
+                          <select class="form-control" name="designation">
+                              <option value="">Designation</option>
+                              <option value="FWP" {% if form.designation.value == 'FWP' %}selected{% endif %}>FWP</option>
+                              <option value="Supervisor" {% if form.designation.value == 'Supervisor' %}selected{% endif %}>Supervisor</option>
+                              <option value="City Manager" {% if form.designation.value == 'City Manager' %}selected{% endif %}>City Manager</option>
+                              <option value="Warehouse Executive" {% if form.designation.value == 'Warehouse Executive' %}selected{% endif %}>Warehouse Executive</option>
+                          </select>
+                      </div>
+                  </div>
+                  
+
+
+
+                    <div class="form-group col-md-6">
+                      <div class="m-b-15">
+                        <label >Program Enroll</label>
+                          <select class="form-control" name="programEnroll">
+                              <option value="">Program Enroll</option>
+                              <option value="MI" {% if form.programEnroll.value == 'MI' %}selected{% endif %}>MI</option>
+                              <option value="NOW" {% if form.programEnroll.value == 'NOW' %}selected{% endif %}>NOW</option>
+                              <option value="LAMPS" {% if form.programEnroll.value == 'LAMPS' %}selected{% endif %}>LAMPS</option>
+                          </select>
+                      </div>
+                  </div>
+                  
+                </div>
+
+              <div class="form-row">
+
+
+                <div class="form-group col-md-6">
+                  <label >Code</label>
+                            <input type="text" name="code" class="form-control" placeholder="Code"
+                              value="{{ form.code.value|default_if_none:'' }}" required="" id="mobileInput">
+
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label >C4 Date</label>
+                                      <div class="input-affix">
+                                        <i class="prefix-icon anticon anticon-calendar"></i>
+                                        <input type="date" class="form-control" name="c4Date" value="{{ form.c4Date.value|default_if_none:'' }}"  >
+                                      </div>
+                </div>
+
+
+              </div>
+
+
+                  <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                      <label >C4 Expiry</label>
+                                      <input type="text" name="c4Exp" class="form-control" 
+                                        id="mobileInput" value="365" disabled>
+                                      <input type="hidden" name="c4Exp" value="{{ form.c4Exp.value|default_if_none:'' }}">
+
+                                    </div>
+
+
+                                    <div class="form-group col-md-6">
+
+                      
+                                      <label for="picture">Date Of Leaving</label>
+                                      <i class="prefix-icon anticon anticon-calendar"></i>
+                                      <input type="date"  name='dol' class="form-control" value="{{ form.dol.value|default_if_none:'' }}">
+              
+                                    </div>
+                  </div>
+                             
+                                  <hr>
+                              <div class="row">
+                                <div class="col-md-12 text-right">
+                                  <!-- Add 'text-right' class to align content to the right -->
+                                  <button type="submit" class="btn btn-info btn-lg waves-effect waves-light">Submit</button>
+                                </div>
+                              </div>
+              
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock content %}
