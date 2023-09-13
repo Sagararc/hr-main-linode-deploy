@@ -40,11 +40,9 @@ class RegisterModel(models.Model):
     c4Exp = models.IntegerField(default='365' , null='True' ,blank=True )
     dol = models.DateField(null=True,blank=True)
     
-   
+    def __str__(self):
+            return self.name
 
-        
-    
-    
 class UserLogin(models.Model):
     username = models.CharField(max_length=30)
     password = models.CharField(max_length=30)

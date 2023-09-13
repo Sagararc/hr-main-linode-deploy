@@ -73,7 +73,7 @@
                       <div class="input-affix">
                         <i class="prefix-icon anticon anticon-calendar"></i>
                         <label for="name">Date Of Joining</label>
-                        <input type="date" name="doj" class="form-control datepicker-input" value="{{ form.doj.value|default_if_none:'' }}" placeholder="">
+                        <input type="date" name='doj' class="form-control" value="{{ form.doj.value|default_if_none:'' }}" placeholder="">
                       </div>
 
 
@@ -84,7 +84,7 @@
                     <div class="form-group col-md-6">
 
                       <label for="picture">Profile Picture</label>
-                        <input type="file" class="form-control"value="{{ form.picture.value|default_if_none:'' }}">
+                        <input type="file" name="picture" class="form-control"value="{{ form.picture.value|default_if_none:'' }}">
                     
                     </div>
                     <div class="form-group col-md-6">
@@ -103,13 +103,13 @@
                     
                     <div class="form-group col-md-6">
                       <label for="picture">C4</label>
-                      <input type="file" class="form-control">
+                      <input type="file" name="c4" class="form-control">
                       
                     </div>
                     
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6" hidden>
                       <label for="customFile">Sign-Off</label>
-                      <input type="file" class="form-control">
+                      <input type="file" name="sign_off" class="form-control">
                     
                     </div>
                   </div>
@@ -171,7 +171,7 @@
 
 
                     <div class="form-group col-md-6">
-                      <label >Aadhar Card Attested</label>
+                      <label >City</label>
                       <div class="m-b-15">
                         <select class="form-control" name="cityReg" id="cityReg">
                           {% for city in cities %}

@@ -52,7 +52,6 @@ def UserRegister(request):
             form = RegisterForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
-                
                 return redirect('home')
     else:
         form = RegisterForm()
