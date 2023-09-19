@@ -51,12 +51,12 @@
                     <div class="form-group col-md-6">
                       <label for="name">Name</label>
                       <input type="text" class="form-control" name="name" placeholder="Name"
-                        value="{{ form.name.value|default_if_none:'' }}" required="">
+                        value="{{ form.name.value|default_if_none:'' }}" >
                     </div>
                     <div class="form-group col-md-6">
                       <label for="name">Mobile</label>
                       <input type="text" name="mobile" class="form-control" placeholder="Mobile"
-                        value="{{ form.mobile.value|default_if_none:'' }}" required="" id="mobileInput">
+                        value="{{ form.mobile.value|default_if_none:'' }}"  id="mobileInput">
 
                     </div>
                   </div>
@@ -65,7 +65,7 @@
 
                       <label for="name">Email</label>
                       <input type="email" name="email" class="form-control" placeholder="Email"
-                        value="{{ form.email.value|default_if_none:'' }}" required="">
+                        value="{{ form.email.value|default_if_none:'' }}" >
 
                     </div>
                     <div class="form-group col-md-6">
@@ -103,12 +103,11 @@
                     
                     <div class="form-group col-md-6">
                       <label for="picture">C4</label>
-                      <input type="file" name="c4" class="form-control">
-                      
+                      <input type="file" name="c4" class="form-control" accept="application/pdf">
                     </div>
                     
-                    <div class="form-group col-md-6" hidden>
-                      <label for="customFile">Sign-Off</label>
+                    <div class="form-group col-md-6" >
+                      <label for="customFile">Aadhar Verification</label>
                       <input type="file" name="sign_off" class="form-control">
                     
                     </div>
@@ -137,23 +136,29 @@
                     <div class="form-group col-md-6">
                       <label for="acc_num">Account Number</label>
                       <input type="text" class="form-control" name="accNnum" placeholder="Account Number"
-                      value="{{ form.accNnum.value|default_if_none:'' }}" required="">
+                      value="{{ form.accNnum.value|default_if_none:'' }}" >
                     </div>
 
                     </div>
 
                     <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                       <label for="acc_num">IFSC</label>
                       <input type="text" name="ifsc" class="form-control" placeholder="IFSC"
-                        value="{{ form.ifsc.value|default_if_none:'' }}" required="" id="mobileInput">
+                        value="{{ form.ifsc.value|default_if_none:'' }}"  id="mobileInput">
 
                     </div>
                 
                   
-                    <div class="form-group col-md-6">
-                      <label for="acc_num">Aadhar</label>
-                      <input type="file" class="form-control" >
+                    <div class="form-group col-md-4">
+                      <label for="acc_num">Aadhar Front</label>
+                      <input type="file" name="aadhar" class="form-control" >
+                      
+                    </div>
+
+                    <div class="form-group col-md-4">
+                      <label for="acc_num">Aadhar Back</label>
+                      <input type="file" name="aadharb" class="form-control" >
                       
                     </div>
 
@@ -220,7 +225,7 @@
                 <div class="form-group col-md-6">
                   <label >Code</label>
                             <input type="text" name="code" class="form-control" placeholder="Code"
-                              value="{{ form.code.value|default_if_none:'' }}" required="" id="mobileInput">
+                              value="{{ form.code.value|default_if_none:'' }}"  id="mobileInput">
 
                 </div>
 
