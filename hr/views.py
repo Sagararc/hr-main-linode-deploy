@@ -11,7 +11,7 @@ from datetime import datetime
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 import  csv
-
+from django.db.models.fields.files import FileField, ImageField
 from collections import Counter
 from django.db.models import F
 
@@ -52,6 +52,7 @@ def UserRegister(request):
             form = RegisterForm(request.POST, request.FILES)
             if form.is_valid():
                 form.save()
+                
                 return redirect('home')
     else:
         form = RegisterForm()
@@ -160,8 +161,16 @@ def export_data(request):
     excluded_fields = ['pwd']
     field_names = [field.name for field in model_fields if field.name not in excluded_fields]
 
-    rows = ([getattr(row, field_name) for field_name in field_names] for row in data)
-    rows = list(rows)  # Convert generator object to a list
+    rows = []
+
+    for row in data:
+        new_row = []
+        for field_name in field_names:
+            value = getattr(row, field_name)
+            if isinstance(value, (FileField, ImageField)) and value:
+                value = f'http://172.105.41.115:8001{value.url}'
+            new_row.append(value)
+        rows.append(new_row)
 
     pseudo_buffer = Echo()
     writer = csv.writer(pseudo_buffer)
